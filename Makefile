@@ -8,7 +8,7 @@ DBGCFLAGS=-g -Wall -DDBG
 DBG2CFLAGS=-g -Wall -DDBG2
 
 LIBS=-lgsl -lgslcblas -lm
-EXES=DotProduct omp_mm
+EXES=DotProduct omp_mm ltyak00 ilyak01 ilyak02
 
 # DotProduct: I think this was the example file (say, to be used as guidance) for the OpenMP assignment 4.
 # # However, in 2019, quite alot of warnings, especially with gettime of day.
@@ -23,6 +23,15 @@ omp_mm: omp_mm.c
 # as usual some stuff from internet course examples
 bowd0: bowd0.c
 	${CC} ${OMPCFLAGS} -o $@ $^
+
+ilyak00: ilyak00.cpp
+	${CPP} ${OMPCFLAGS} -o $@ $^
+
+ilyak01: ilyak01.cpp
+	${CPP} ${OMPCFLAGS} -o $@ $^
+
+ilyak02: ilyak02.cpp
+	${CPP} ${OMPCFLAGS} -o $@ $^
 
 .PHONY: clean
 
