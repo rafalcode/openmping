@@ -7,8 +7,9 @@ OMPCFLAGS=-g -Wall -fopenmp
 DBGCFLAGS=-g -Wall -DDBG
 DBG2CFLAGS=-g -Wall -DDBG2
 
+LIBSTHRE=-lpthread
 LIBS=-lgsl -lgslcblas -lm
-EXES=DotProduct omp_mm ltyak00 ilyak01 ilyak02 ilyak02_
+EXES=DotProduct omp_mm mmjn ltyak00 ilyak01 ilyak02 ilyak02_ mmm_unroll
 
 # DotProduct: I think this was the example file (say, to be used as guidance) for the OpenMP assignment 4.
 # # However, in 2019, quite alot of warnings, especially with gettime of day.
@@ -37,6 +38,23 @@ ilyak02: ilyak02.cpp
 # but once i orted out how bad c++ was with formatting, and started to use sprint, then I managed to do a proper version.
 ilyak02_: ilyak02_.cpp
 	${CPP} ${OMPCFLAGS} -o $@ $^
+
+# from 13 March 2010
+mmjn: mmjn.c
+	${CC} ${CFLAGS} -o $@ $^ ${LIBSTHRE}
+mmjn_omp: mmjn_omp.c
+	${CC} ${OMPCFLAGS} -o $@ $^
+
+# OK< here we go back to 2007 and some assignment code demonstrating the different
+# ways matrix multiplication can be done to make it faster.
+# I start with the simplest (pair) unroll which is almost the same as the naive version
+# and then do an npenmp version. Actually it's enough to demonstrate how simple openmp is to apply
+# and also shows it gives the necessary speed up (with 4 threads it will be 4 times as fast)>
+mmm_unroll: mmm_unroll.c
+	${CC} ${CFLAGS} -o $@ $^
+mmmunr_omp: mmmunr_omp.c
+	${CC} ${OMPCFLAGS} -o $@ $^
+
 
 .PHONY: clean
 
