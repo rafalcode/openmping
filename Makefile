@@ -9,7 +9,7 @@ DBG2CFLAGS=-g -Wall -DDBG2
 
 LIBSTHRE=-lpthread
 LIBS=-lgsl -lgslcblas -lm
-EXES=DotProduct omp_mm mmjn ltyak00 ilyak01 ilyak02 ilyak02_ mmm_unroll
+EXES=DotProduct omp_mm mmjn ltyak00 ilyak01 ilyak02 ilyak02_ mmm_unroll mmnorm_pth2
 
 # DotProduct: I think this was the example file (say, to be used as guidance) for the OpenMP assignment 4.
 # # However, in 2019, quite alot of warnings, especially with gettime of day.
@@ -55,6 +55,9 @@ mmm_unroll: mmm_unroll.c
 mmmunr_omp: mmmunr_omp.c
 	${CC} ${OMPCFLAGS} -o $@ $^
 
+# pthreads is now part o of libc ... so it needs nothign extra ...
+mmnorm_pth2: mmnorm_pth2.c
+	${CC} ${CFLAGS} -o $@ $^
 
 .PHONY: clean
 
