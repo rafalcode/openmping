@@ -60,8 +60,12 @@ mmnorm_pth2: mmnorm_pth2.c
 	${CC} ${CFLAGS} -o $@ $^
 
 # testing basic blas stuff.
+# where did this file come from? Dunno, pilfered from somewhere.
 testdgemm: testdgemm.cc
 	${CPP} ${CFLAGS} -o $@ $^ -lblas
+
+example_user: example_user.c
+	${CPP} ${CFLAGS} -o $@ $^ -lmkl_rt
 
 .PHONY: clean
 
