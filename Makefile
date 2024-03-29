@@ -9,7 +9,7 @@ DBG2CFLAGS=-g -Wall -DDBG2
 
 LIBSTHRE=-lpthread
 LIBS=-lgsl -lgslcblas -lm
-EXES=DotProduct omp_mm mmjn ltyak00 ilyak01 ilyak02 ilyak02_ mmm_unroll mmnorm_pth2 testdgemm
+EXES=DotProduct omp_mm mmjn ltyak00 ilyak01 ilyak02 ilyak02_ mmm_unroll mmnorm_pth2 testdgemm example_user
 
 # DotProduct: I think this was the example file (say, to be used as guidance) for the OpenMP assignment 4.
 # # However, in 2019, quite alot of warnings, especially with gettime of day.
@@ -65,7 +65,8 @@ testdgemm: testdgemm.cc
 	${CPP} ${CFLAGS} -o $@ $^ -lblas
 
 example_user: example_user.c
-	${CPP} ${CFLAGS} -o $@ $^ -lmkl_rt
+	# ${CPP} ${CFLAGS} -o $@ $^ -lmkl_rt
+	${CPP} ${CFLAGS} -o $@ $^ -llapack
 
 .PHONY: clean
 
